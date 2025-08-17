@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Page</title>
+    <style>
+        body { font-family: Arial; background: #f0f0f0; }
+        form { background: white; padding: 20px; margin: 50px auto; width: 350px; border-radius: 10px; box-shadow: 0 0 10px gray; }
+        input, select, textarea { width: 100%; padding: 8px; margin: 8px 0; border-radius: 5px; border: 1px solid #ccc; }
+        label { font-weight: bold; }
+        button { width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <form action="signup" method="post">
+        <h2>Registration Form</h2>
+
+        <label>Username:</label>
+        <input type="text" name="username" required />
+
+        <label>Email:</label>
+        <input type="email" name="email" required />
+
+        <label>Password:</label>
+        <input type="password" name="password" required />
+
+        <label>Gender:</label>
+        <select name="gender" required>
+            <option value="">--Select Gender--</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label>Address:</label>
+        <textarea name="address" rows="3" placeholder="Enter your address" required></textarea>
+
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html>
+
