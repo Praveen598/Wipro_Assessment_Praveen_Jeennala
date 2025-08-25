@@ -1,0 +1,10 @@
+<p>todo-app works!</p>
+
+<form (ngSubmit)="submit()">
+  <input type="text" [(ngModel)]="todo" name="todo" placeholder="Enter what you think">
+  <button type="submit">Submit</button>
+</form>
+the result:
+<ul>
+  <li *ngFor="let item of h">{{ item }}</li>
+</ul>
