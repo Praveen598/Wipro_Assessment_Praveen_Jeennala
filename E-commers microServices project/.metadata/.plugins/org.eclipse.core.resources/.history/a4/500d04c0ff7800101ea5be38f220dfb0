@@ -1,0 +1,29 @@
+package com.zomatodeliveryagent;
+
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import lombok.RequiredArgsConstructor;
+
+@RestController
+
+@RequestMapping("/api/v1/zomato/delivery")
+public class conrtollerss {
+	@Autowired
+	private   ZomatoAgentService services;
+    
+	@PatchMapping("/getLocationOfAgent")
+	public Map<String,String> getUpdateLocation(){
+		int range=100;
+		while(range>0) {
+			services.updateDeleveryAgentLocation(Math.random()+","+Math.random());
+			range--;
+		}
+		return Map.of("message","Location Updated Every Second");
+	}
+	
+}
