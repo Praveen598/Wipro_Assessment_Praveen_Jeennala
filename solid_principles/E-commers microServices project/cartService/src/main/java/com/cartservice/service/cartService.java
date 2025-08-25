@@ -1,0 +1,74 @@
+package com.cartservice.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cartservice.cartInterface.cartInterface;
+import com.cartservice.dtos.CartItemDto;
+import com.cartservice.entity.Cart;
+import com.cartservice.entity.ProductDTO;
+import com.cartservice.exception.itemNotFoundException;
+import com.cartservice.repo.cartRepo;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+
+public class cartService implements servicesInterface {
+	@Autowired
+	private cartRepo repo;
+	@Autowired
+     private cartInterface inter;
+	 @Override
+	 
+	
+	 public Cart saveItemIntoCart(Long id, Long quantity) {
+	     // Fetch product details from Feign
+	     ProductDTO product = inter.getProductById(id);
+
+	     // Check if cart item already exists in DB
+	     Cart existingCart = repo.findById(id).orElseThrow(()-> new itemNotFoundException("item you searching is not avalable"));
+
+	     // Set/update fields
+	     existingCart.setPid(id);
+	     existingCart.setItemName(product.getName()); // map from Product
+	     existingCart.setQuantity(quantity);
+	     existingCart.setPrice(product.getPrice());
+
+	     return repo.save(existingCart);
+	 }
+	 @Override
+	 public void deleteCartItem(Long id) {
+		repo.deleteById(id);
+		
+	 }
+	 @Override
+	 public Cart updateQuantity(Long id, Long cart) {
+		Cart cartt=repo.findById(id).orElseThrow(()-> new itemNotFoundException("item you searching is not avalable"));
+		cartt.setQuantity(cart);
+		return repo.save(cartt);
+	 }
+	 
+
+	 @Override
+	 public List<CartItemDto> getAllServiceProducts() {
+	     return repo.findAll()
+	                .stream()
+	                .map(cart -> new CartItemDto(
+	                    cart.getPid(),
+	                    cart.getQuantity(),
+	                    cart.getPrice() // assuming you store per-item price in Cart entity
+	                ))
+	                .toList();
+	 }
+
+
+	 
+
+	 }
+
+	
+
+

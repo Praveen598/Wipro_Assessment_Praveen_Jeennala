@@ -1,0 +1,57 @@
+package com.example.demo.entity;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+
+@Entity
+public class School {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	 private long id;
+	  private String schoolName;
+	  private String schoolAdress;
+	  @OneToOne(cascade = CascadeType.ALL) 
+	  @JoinColumn(name = "teacher_id") 
+	  private Teacher teachers;
+	  public long getId() {
+		  return id;
+	  }
+	  public void setId(long id) {
+		  this.id = id;
+	  }
+	  public String getSchoolName() {
+		  return schoolName;
+	  }
+	  public void setSchoolName(String schoolName) {
+		  this.schoolName = schoolName;
+	  }
+	  public String getSchoolAdress() {
+		  return schoolAdress;
+	  }
+	  public void setSchoolAdress(String schoolAdress) {
+		  this.schoolAdress = schoolAdress;
+	  }
+	  public Teacher getTeachers() {
+		  return teachers;
+	  }
+	  public void setTeachers(Teacher teachers) {
+		  this.teachers = teachers;
+	  }
+	  public School(long id, String schoolName, String schoolAdress, Teacher teachers) {
+		super();
+		this.id = id;
+		this.schoolName = schoolName;
+		this.schoolAdress = schoolAdress;
+		this.teachers = teachers;
+	  }
+	  public School() {
+		super();
+	  }
+	  
+
+}

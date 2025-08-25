@@ -1,0 +1,38 @@
+package com.orderservice.entity;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.orderservice.dtos.CartItemDto;
+import com.orderservice.dtos.ProductDto;
+
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor 
+public class Orders {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonIgnore  
+	private Long id;
+	@ElementCollection(fetch = FetchType.EAGER)
+	private List<Long> products;
+
+	@ElementCollection
+	private List<Long> Products;
+	private String Address;
+	private Long price;
+	
+
+}

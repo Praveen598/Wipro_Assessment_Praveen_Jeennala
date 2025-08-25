@@ -1,0 +1,72 @@
+<form [formGroup]="myFormReact" (ngSubmit)="onSubmitReact()">
+  <mat-form-field>
+    <mat-label>enter name</mat-label>
+    <input matInput formControlName="name">
+  </mat-form-field>
+  <br>
+
+  @if (myFormReact.get('name')?.invalid && myFormReact.get('name')?.touched) {
+    <small>
+      @if (myFormReact.get('name')?.errors?.['required']) {
+        Name is required
+      }
+      @if (myFormReact.get('name')?.errors?.['minlength']) {
+        <mat-error>min lenght required</mat-error>
+      }
+    </small>
+  } 
+  <br>
+
+  <mat-form-field>
+  <mat-label>Enter your email</mat-label>
+  <input
+    matInput
+    formControlName="email"
+    
+  />
+
+</mat-form-field>
+ @if (myFormReact.get('email')?.invalid && myFormReact.get('email')?.touched) {
+  @if (myFormReact.get('email')?.errors?.['required']) {
+    <mat-error>Email is required</mat-error>
+  }
+  @if (myFormReact.get('email')?.errors?.['email']) {
+    <mat-error>Enter a valid email address</mat-error>
+  }
+}
+
+
+
+<br>
+
+  <mat-form-field>
+    <mat-label>enter subject</mat-label>
+    <input matInput formControlName="subject">
+  </mat-form-field>
+
+   @if (myFormReact.get('subject')?.invalid && myFormReact.get('subject')?.touched) {
+    <small>
+      @if (myFormReact.get('subject')?.errors?.['required']) {
+        <mat-error>comment required</mat-error>
+      }
+      @if (myFormReact.get('name')?.errors?.['Maxlength']) {
+        max lenght is 250 words
+      }
+    </small>
+  } 
+<br>
+  <mat-form-field>
+    <mat-label>comments</mat-label>
+    <textarea matInput formControlName="comments"></textarea>
+  </mat-form-field>
+<br>
+  <button mat-flat-button type="submit">submit</button>
+</form>
+<br><br><br><br><br>
+<app-movie-cart></app-movie-cart>
+<br><br><br><br><br>
+
+<app-music></app-music>
+<br><br><br><br>
+hii
+
